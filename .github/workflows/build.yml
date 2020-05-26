@@ -89,7 +89,7 @@ jobs:
         run: .buildscript/prepare_mkdocs.sh
 
       - name: Deploy docs
-        uses: mhausenblas/mkdocs-deploy-gh-pages@v1.12
+        uses: mhausenblas/mkdocs-deploy-gh-pages@master
         env:
           PERSONAL_TOKEN: ${{ secrets.GH_CLIPPY_TOKEN }}
 
@@ -102,7 +102,7 @@ jobs:
         run: git cherry-pick b3205fa199a19d6fbf13ee5c8e0c3d6d2b15b05f
 
       - name: Push gh-pages
-        uses: ad-m/github-push-action@v0.5.0
+        uses: ad-m/github-push-action@master
         with:
           branch: gh-pages
           github_token: ${{ secrets.GH_CLIPPY_TOKEN }}
