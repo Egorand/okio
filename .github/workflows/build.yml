@@ -77,13 +77,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 14
-
-      - name: Upload Artifacts
-        run: |
-          ./gradlew clean publish
-        env:
-          ORG_GRADLE_PROJECT_SONATYPE_NEXUS_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-          ORG_GRADLE_PROJECT_SONATYPE_NEXUS_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+#
+#      - name: Upload Artifacts
+#        run: |
+#          ./gradlew clean publish
+#        env:
+#          ORG_GRADLE_PROJECT_SONATYPE_NEXUS_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+#          ORG_GRADLE_PROJECT_SONATYPE_NEXUS_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
 
       - name: Prepare docs
         run: .buildscript/prepare_mkdocs.sh
