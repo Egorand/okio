@@ -86,7 +86,9 @@ jobs:
 #          ORG_GRADLE_PROJECT_SONATYPE_NEXUS_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
 
       - name: Prepare docs
-        run: .buildscript/prepare_mkdocs.sh
+        run: |
+          chmod -x .buildscript/prepare_mkdocs.sh
+          .buildscript/prepare_mkdocs.sh
 
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
