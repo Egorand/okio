@@ -1,0 +1,511 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A modern I/O library for Android, Kotlin, and Java.">
+      
+      
+      
+        <meta name="author" content="Square, Inc.">
+      
+      <link rel="shortcut icon" href="../../../../../../images/icon-square.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.0">
+    
+    
+      
+        <title>init - Okio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.89dc9fe3.min.css">
+      
+        <link rel="stylesheet" href="../../../../../../assets/stylesheets/palette.ecd4686e.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#7e57c2">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../../../../css/app.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-purple" data-md-color-accent="white">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#init" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../../../../.." title="Okio" class="md-header-nav__button md-logo" aria-label="Okio">
+      
+  <img src="../../../../../../images/icon-square.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Okio
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+               init 
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/square/okio/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Okio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="Okio" class="md-nav__button md-logo" aria-label="Okio">
+      
+  <img src="../../../../../../images/icon-square.png" alt="logo">
+
+    </a>
+    Okio
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/square/okio/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Okio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="https://stackoverflow.com/questions/tagged/okio?sort=active" title="Stack Overflow ⏏" class="md-nav__link">
+      Stack Overflow ⏏
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../" title="2.x API" class="md-nav__link">
+      2.x API
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="https://square.github.io/okio/1.x/okio/" title="1.x API ⏏" class="md-nav__link">
+      1.x API ⏏
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../changelog/" title="Change Log" class="md-nav__link">
+      Change Log
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../contributing/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../../code_of_conduct/" title="Code of Conduct" class="md-nav__link">
+      Code of Conduct
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/square/okio/edit/master/docs/2.x/okio/okio/-buffer/-unsafe-cursor/-init-.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <p><a href="../../../../">okio</a> / <a href="../../../">okio</a> / <a href="../../">Buffer</a> / <a href="../">UnsafeCursor</a> / <a href="./">&lt;init&gt;</a></p>
+<h1 id="init">&lt;init&gt;<a class="headerlink" href="#init" title="Permanent link">&para;</a></h1>
+<p>(jvm) <code>UnsafeCursor()</code></p>
+<p>A handle to the underlying data in a buffer. This handle is unsafe because it does not enforce
+its own invariants. Instead, it assumes a careful user who has studied Okio&rsquo;s implementation
+details and their consequences.</p>
+<p>Buffer Internals</p>
+<p>Most code should use <code>Buffer</code> as a black box: a class that holds 0 or more bytes of
+data with efficient APIs to append data to the end and to consume data from the front. Usually
+this is also the most efficient way to use buffers because it allows Okio to employ several
+optimizations, including:</p>
+<ul>
+<li><strong>Fast Allocation:</strong> Buffers use a shared pool of memory that is not zero-filled before use.</li>
+<li><strong>Fast Resize:</strong> A buffer&rsquo;s capacity can change without copying its contents.</li>
+<li><strong>Fast Move:</strong> Memory ownership can be reassigned from one buffer to another.</li>
+<li><strong>Fast Copy:</strong> Multiple buffers can share the same underlying memory.</li>
+<li><strong>Fast Encoding and Decoding:</strong> Common operations like UTF-8 encoding and decimal decoding
+    do not require intermediate objects to be allocated.</li>
+</ul>
+<p>These optimizations all leverage the way Okio stores data internally. Okio Buffers are
+implemented using a doubly-linked list of segments. Each segment is a contiguous range within a
+8 KiB <code>ByteArray</code>. Each segment has two indexes, <code>start</code>, the offset of the first byte of the
+array containing application data, and <code>end</code>, the offset of the first byte beyond <code>start</code> whose
+data is undefined.</p>
+<p>New buffers are empty and have no segments:</p>
+<div class="highlight"><pre><span></span><code>val buffer = Buffer()
+</code></pre></div>
+
+<p>We append 7 bytes of data to the end of our empty buffer. Internally, the buffer allocates a
+segment and writes its new data there. The lone segment has an 8 KiB byte array but only 7
+bytes of data:</p>
+<div class="highlight"><pre><span></span><code>buffer.writeUtf8(&quot;sealion&quot;)
+
+// [ &#39;s&#39;, &#39;e&#39;, &#39;a&#39;, &#39;l&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39;?&#39;, &#39;?&#39;, &#39;?&#39;, ...]
+//    ^                                  ^
+// start = 0                          end = 7
+</code></pre></div>
+
+<p>When we read 4 bytes of data from the buffer, it finds its first segment and returns that data
+to us. As bytes are read the data is consumed. The segment tracks this by adjusting its
+internal indices.</p>
+<div class="highlight"><pre><span></span><code>buffer.readUtf8(4) // &quot;seal&quot;
+
+// [ &#39;s&#39;, &#39;e&#39;, &#39;a&#39;, &#39;l&#39;, &#39;i&#39;, &#39;o&#39;, &#39;n&#39;, &#39;?&#39;, &#39;?&#39;, &#39;?&#39;, ...]
+//                        ^              ^
+//                     start = 4      end = 7
+</code></pre></div>
+
+<p>As we write data into a buffer we fill up its internal segments. When a write doesn&rsquo;t fit into
+a buffer&rsquo;s last segment, additional segments are allocated and appended to the linked list of
+segments. Each segment has its own start and end indexes tracking where the user&rsquo;s data begins
+and ends.</p>
+<div class="highlight"><pre><span></span><code>val xoxo = new Buffer()
+xoxo.writeUtf8(&quot;xo&quot;.repeat(5_000))
+
+// [ &#39;x&#39;, &#39;o&#39;, &#39;x&#39;, &#39;o&#39;, &#39;x&#39;, &#39;o&#39;, &#39;x&#39;, &#39;o&#39;, ..., &#39;x&#39;, &#39;o&#39;, &#39;x&#39;, &#39;o&#39;]
+//    ^                                                               ^
+// start = 0                                                      end = 8192
+//
+// [ &#39;x&#39;, &#39;o&#39;, &#39;x&#39;, &#39;o&#39;, ..., &#39;x&#39;, &#39;o&#39;, &#39;x&#39;, &#39;o&#39;, &#39;?&#39;, &#39;?&#39;, &#39;?&#39;, ...]
+//    ^                                            ^
+// start = 0                                   end = 1808
+</code></pre></div>
+
+<p>The start index is always <strong>inclusive</strong> and the end index is always <strong>exclusive</strong>. The data
+preceding the start index is undefined, and the data at and following the end index is
+undefined.</p>
+<p>After the last byte of a segment has been read, that segment may be returned to an internal
+segment pool. In addition to reducing the need to do garbage collection, segment pooling also
+saves the JVM from needing to zero-fill byte arrays. Okio doesn&rsquo;t need to zero-fill its arrays
+because it always writes memory before it reads it. But if you look at a segment in a debugger
+you may see its effects. In this example, one of the &ldquo;xoxo&rdquo; segments above is reused in an
+unrelated buffer:</p>
+<div class="highlight"><pre><span></span><code>val abc = new Buffer()
+abc.writeUtf8(&quot;abc&quot;)
+
+// [ &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;o&#39;, &#39;x&#39;, &#39;o&#39;, &#39;x&#39;, &#39;o&#39;, ...]
+//    ^              ^
+// start = 0     end = 3
+</code></pre></div>
+
+<p>There is an optimization in <code>Buffer.clone()</code> and other methods that allows two segments to
+share the same underlying byte array. Clones can&rsquo;t write to the shared byte array; instead they
+allocate a new (private) segment early.</p>
+<div class="highlight"><pre><span></span><code>val nana = new Buffer()
+nana.writeUtf8(&quot;na&quot;.repeat(2_500))
+nana.readUtf8(2) // &quot;na&quot;
+
+// [ &#39;n&#39;, &#39;a&#39;, &#39;n&#39;, &#39;a&#39;, ..., &#39;n&#39;, &#39;a&#39;, &#39;n&#39;, &#39;a&#39;, &#39;?&#39;, &#39;?&#39;, &#39;?&#39;, ...]
+//              ^                                  ^
+//           start = 2                         end = 5000
+
+nana2 = nana.clone()
+nana2.writeUtf8(&quot;batman&quot;)
+
+// [ &#39;n&#39;, &#39;a&#39;, &#39;n&#39;, &#39;a&#39;, ..., &#39;n&#39;, &#39;a&#39;, &#39;n&#39;, &#39;a&#39;, &#39;?&#39;, &#39;?&#39;, &#39;?&#39;, ...]
+//              ^                                  ^
+//           start = 2                         end = 5000
+//
+// [ &#39;b&#39;, &#39;a&#39;, &#39;t&#39;, &#39;m&#39;, &#39;a&#39;, &#39;n&#39;, &#39;?&#39;, &#39;?&#39;, &#39;?&#39;, ...]
+//    ^                             ^
+//  start = 0                    end = 6
+</code></pre></div>
+
+<p>Segments are not shared when the shared region is small (ie. less than 1 KiB). This is intended
+to prevent fragmentation in sharing-heavy use cases.</p>
+<p>Unsafe Cursor API</p>
+<p>This class exposes privileged access to the internal byte arrays of a buffer. A cursor either
+references the data of a single segment, it is before the first segment (<code>offset == -1</code>), or it
+is after the last segment (<code>offset == buffer.size</code>).</p>
+<p>Call <a href="../seek/">UnsafeCursor.seek</a> to move the cursor to the segment that contains a specified offset.
+After seeking, <a href="../data/">UnsafeCursor.data</a> references the segment&rsquo;s internal byte array,
+<a href="../start/">UnsafeCursor.start</a> is the segment&rsquo;s start and <a href="../end/">UnsafeCursor.end</a> is its end.</p>
+<p>Call <a href="../next/">UnsafeCursor.next</a> to advance the cursor to the next segment. This returns -1 if there
+are no further segments in the buffer.</p>
+<p>Use <a href="../../read-unsafe/">Buffer.readUnsafe</a> to create a cursor to read buffer data and <a href="../../read-and-write-unsafe/">Buffer.readAndWriteUnsafe</a>
+to create a cursor to read and write buffer data. In either case, always call
+<a href="../close/">UnsafeCursor.close</a> when done with a cursor. This is convenient with Kotlin&rsquo;s
+<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/use.html">use</a> extension function. In this example we read all of the bytes in a buffer into a byte
+array:</p>
+<div class="highlight"><pre><span></span><code>val bufferBytes = ByteArray(buffer.size.toInt())
+
+buffer.readUnsafe().use { cursor -&gt;
+  while (cursor.next() != -1) {
+    System.arraycopy(cursor.data, cursor.start,
+        bufferBytes, cursor.offset.toInt(), cursor.end - cursor.start);
+  }
+}
+</code></pre></div>
+
+<p>Change the capacity of a buffer with <a href="../resize-buffer/">resizeBuffer</a>. This is only permitted for
+read+write cursors. The buffer&rsquo;s size always changes from the end: shrinking it removes bytes
+from the end; growing it adds capacity to the end.</p>
+<p>Warnings</p>
+<p>Most application developers should avoid this API. Those that must use this API should
+respect these warnings.</p>
+<p><strong>Don&rsquo;t mutate a cursor.</strong> This class has public, non-final fields because that is convenient
+for low-level I/O frameworks. Never assign values to these fields; instead use the cursor API
+to adjust these.</p>
+<p><strong>Never mutate <code>data</code> unless you have read+write access.</strong> You are on the honor system to never
+write the buffer in read-only mode. Read-only mode may be more efficient than read+write mode
+because it does not need to make private copies of shared segments.</p>
+<p><strong>Only access data in <code>[start..end)</code>.</strong> Other data in the byte array is undefined! It may
+contain private or sensitive data from other parts of your process.</p>
+<p><strong>Always fill the new capacity when you grow a buffer.</strong> New capacity is not zero-filled and
+may contain data from other parts of your process. Avoid leaking this information by always
+writing something to the newly-allocated capacity. Do not assume that new capacity will be
+filled with <code>0</code>; it will not be.</p>
+<p><strong>Do not access a buffer while is being accessed by a cursor.</strong> Even simple read-only
+operations like <a href="../../clone/">Buffer.clone</a> are unsafe because they mark segments as shared.</p>
+<p><strong>Do not hard-code the segment size in your application.</strong> It is possible that segment sizes
+will change with advances in hardware. Future versions of Okio may even have heterogeneous
+segment sizes.</p>
+<p>These warnings are intended to help you to use this API safely. It&rsquo;s here for developers
+that need absolutely the most throughput. Since that&rsquo;s you, here&rsquo;s one final performance tip.
+You can reuse instances of this class if you like. Use the overloads of <a href="../../read-unsafe/">Buffer.readUnsafe</a> and
+<a href="../../read-and-write-unsafe/">Buffer.readAndWriteUnsafe</a> that take a cursor and close it after use.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019 Square, Inc.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../../../assets/javascripts/vendor.36cbf620.min.js"></script>
+      <script src="../../../../../../assets/javascripts/bundle.00c583dd.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../../../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../../../../assets/javascripts/worker/search.7f7c8775.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
